@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { send } = require('express/lib/response')
 
 //creando el servidor con express
 const app = express()
@@ -17,4 +16,3 @@ app.get('*', (req, res) => {
 })
 
 module.exports = app;
-
