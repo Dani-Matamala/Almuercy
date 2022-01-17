@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const meals = require('./routes/meals')
 const orders = require('./routes/orders')
+const auth = require('./routes/auth')
 //creando el servidor con express
 const app = express()
 
@@ -21,5 +22,6 @@ mongoose.connect(process.env.MONGO_URI,
 
 app.use('/api/meals', meals)
 app.use('/api/orders', orders)
+app.use('/api/auth', auth)
 
 module.exports = app;
