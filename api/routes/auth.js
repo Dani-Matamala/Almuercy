@@ -9,7 +9,7 @@ router.post('/register', (req, res) => {
     const { email, password } = req.body
     crypto.randomByte(16, (err, salt) => {
         const newSalt = salt.toString('base64')
-        crypto.pbkdf2(password, newSalt, 100, 64, sha1, (err, key) => {
+        crypto.pbkdf2(password, newSalt, 100, 64, "sha1", (err, key) => {
             const encrytedPassword = key.toString('base64')
             Users.findOne({email}).exec()
                 .then(user => {
@@ -29,7 +29,21 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-    res.send('soy login')
+    const { email, password } = req.body
+    Users.findOne({email}).exec()
+    .then(user => {
+        if(!user){
+            return res.send('usuario y/o contraseña incorrectos')
+        }
+        crypto.pbkdf2(password, user.salt, 100, 64, 'sha1', (err, key) => {
+            const encrytedPassword = key.toString('base64')
+            if(user.password === encrytedPassword){
+                const token = singToken(user._id)
+                return res.send({token})
+            }
+            return res.send('usuario y/o contraseña incorrectos')
+        })
+    })
 })
 
 module.exports = router;
