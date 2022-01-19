@@ -1,9 +1,16 @@
 //Manejador de los pedidos de las comidas
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
 const Users = require('../models/User')
 
 const router = express.Router()
+
+const singToken = (_id) => {
+    return jwt.sign({_id}, 'mi-secreto', {
+        expiresIn: 60*60*24*365,
+    })
+}
 
 router.post('/register', (req, res) => {
     const { email, password } = req.body
