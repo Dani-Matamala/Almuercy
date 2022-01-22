@@ -1,10 +1,9 @@
-import req from 'express/lib/request';
 import jwt from 'jsonwebtoken';
 import Users from '../models/User';
 
 //metodo de autenticacion
 const isAuthenticated = (req, res, next) =>  {
-    const token = req.headers.isAuthenticated
+    const token = req.headers.authorization
     if(!token){
         return res.sendStatus(403)
     }
