@@ -1,7 +1,6 @@
 {
     "version": 2,
-    "name": "Almuercy",
-    "routes": [
+    "builds": [
     {"src": "api/(.*)", "dest": "/api/index.js"}
     ]
 }
