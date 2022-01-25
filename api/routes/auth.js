@@ -15,7 +15,7 @@ const singToken = ( _id ) => {
 
 router.post('/register', (req, res) => {
     const { email, password } = req.body
-    const newSalt
+    let newSalt
     crypto.randomBytes(16, (err, salt) => {
         newSalt = salt.toString('base64')
     })

@@ -7,6 +7,7 @@ const isAuthenticated = (req, res, next) =>  {
     if(!token){
         return res.sendStatus(403)
     }
+    // console.log(token);
     jwt.verify(token, 'mi-secreto', (err, decoded) => {
         const { _id } = decoded
         Users.findOne({_id}).exec()
