@@ -1,5 +1,7 @@
 {
-    "rewrites": [
-    {"source": "/(.*)", "destination": "/api/index"}
+    "version": 2,
+    "name": "Almuercy",
+    "routes": [
+    {"src": "api/(.*)", "dest": "/api/index.js"}
     ]
 }
